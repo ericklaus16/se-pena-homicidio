@@ -45,17 +45,17 @@ validar_agravante(Agravante) :-
 % Lógica para executar as opções
 executar_opcao(1) :- 
     perguntar_dado('Digite o tipo de homicidio (simples/qualificado/culposo): ', Tipo),
-    (validar_tipo(Tipo) -> true; (write('Tipo inválido. Tente novamente.'), nl, executar_opcao(1))),
+    (validar_tipo(Tipo) -> true; (write('Tipo invalido. Tente novamente.'), nl, executar_opcao(1))),
     
     perguntar_dado('Digite a circunstancia atenuante (nenhuma/violenta_emocao/valor_social_moral): ', Atenuante),
-    (validar_atenuante(Atenuante) -> true; (write('Atenuante inválida. Tente novamente.'), nl, executar_opcao(1))),
+    (validar_atenuante(Atenuante) -> true; (write('Atenuante invalida. Tente novamente.'), nl, executar_opcao(1))),
 
     perguntar_dado('Digite a circunstancia agravante (nenhuma/idade_vitima_menor_14_ou_maior_60/negligencia_profissional/omissao_socorro/fuga_flagrante): ', Agravante),
-    (validar_agravante(Agravante) -> true; (write('Agravante inválida. Tente novamente.'), nl, executar_opcao(1))),
+    (validar_agravante(Agravante) -> true; (write('Agravante invalida. Tente novamente.'), nl, executar_opcao(1))),
 
     (Tipo == qualificado -> 
         perguntar_dado('Digite o motivo do homicidio qualificado (torpe/futil/veneno/fogo_explosivo/traicao_emboscada/para_outra_execucao): ', MotivoQualificado),
-        (validar_motivo_qualificado(MotivoQualificado) -> true; (write('Motivo qualificado inválido. Tente novamente.'), nl, executar_opcao(1)))
+        (validar_motivo_qualificado(MotivoQualificado) -> true; (write('Motivo qualificado invalido. Tente novamente.'), nl, executar_opcao(1)))
     ;   true),
     
     set_dados(Tipo, Atenuante, Agravante),
@@ -71,7 +71,8 @@ validar_motivo_qualificado(Motivo) :-
     member(Motivo, [torpe, futil, veneno, fogo_explosivo, traicao_emboscada, para_outra_execucao]).
 
 executar_opcao(0) :- 
-    write('Aplicacao finalizada!'), nl.
+    write('Aplicacao finalizada!'), nl,
+    halt.
 
 executar_opcao(_) :- 
     write('Oops! Essa opcao eh invalida, tente novamente!'), nl,
