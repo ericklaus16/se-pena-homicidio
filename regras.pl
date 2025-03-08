@@ -34,7 +34,7 @@ exclusao_pena_culposo(Consequencias, Agente) :-
 calcular_pena(Tipo, Atenuante, Agravante, (MinFinal, MaxFinal)) :-
     pena_base(Tipo, Min, Max),
     reduzir_pena(Min, Max, Atenuante, MinReduzido, MaxReduzido),
-    aumentar_pena(MinReduzido, MaxReduzido, Agravante, MinFinal, MaxFinal).
+    aumentar_pena(Tipo, MinReduzido, MaxReduzido, Agravante, MinFinal, MaxFinal).
 
 % Aplicação de Redução de Pena
 reduzir_pena(Min, Max, Atenuante, MinFinal, MaxFinal) :-
@@ -45,7 +45,7 @@ reduzir_pena(Min, Max, Atenuante, MinFinal, MaxFinal) :-
     ).
 
 % Aplicação de Aumento de Pena
-aumentar_pena(Min, Max, Agravante, MinFinal, MaxFinal) :-
+aumentar_pena(Tipo, Min, Max, Agravante, MinFinal, MaxFinal) :-
     (   aumento_pena(Agravante, Aumento) -> 
         MinFinal is Min + Min * Aumento,
         MaxFinal is Max + Max * Aumento
@@ -54,5 +54,6 @@ aumentar_pena(Min, Max, Agravante, MinFinal, MaxFinal) :-
             MinFinal = Min, MaxFinal = Max
         ;   Tipo = qualificado ->
             MinFinal = Min, MaxFinal = Max
+        ;   MinFinal = Min, MaxFinal = Max  % Caso padrão
         )
-).
+    ).

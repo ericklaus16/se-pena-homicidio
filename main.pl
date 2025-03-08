@@ -1,4 +1,4 @@
-:- initialization(menu).
+:- discontiguous executar_opcao/1.
 
 :- dynamic tipo_homicidio/1.
 :- dynamic atenuante/1.
